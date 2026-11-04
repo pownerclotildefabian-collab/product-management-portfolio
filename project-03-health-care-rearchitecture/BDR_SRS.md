@@ -93,9 +93,9 @@ This section details the functional specifications to achieve business rules 01 
 
 ---
 
-## 🔐 BR-01: Employer Registration & Status Verification
+### 🔐 BR-01: Employer Registration & Status Verification
 
-## 🔹 Business Rule Overview
+### 🔹 Business Rule Overview
 Every salaried worker must be enrolled by an eligible, authenticated employer. Employers must be able to track the status of registration requests efficiently and securely.
 
 ### 📑 Functional Requirements (FR)
@@ -124,7 +124,7 @@ Every salaried worker must be enrolled by an eligible, authenticated employer. E
 
 ---
 
-## 🆔 BR-02: Identity Validation Engine
+### 🆔 BR-02: Identity Validation Engine
 
 ### 🔹 Business Rule Overview
 The principal member's identity must be validated against official government sources before affiliation can be processed.
