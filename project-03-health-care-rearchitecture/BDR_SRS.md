@@ -87,9 +87,9 @@ This SRS defines the software behavior for the **Contributory Regime Enrollment 
 * **Enterprise Service Bus (ESB):** Orchestrates external identity and tax validations (JCE/DGII).
 * **Data Access Layer:** The ESB serves as the sole orchestrated component authorized to read from and write to the core SQL database, abstracting direct database access from external endpoints.
 
-* # 📋 Business Rules, Functional & Non-Functional Requirements
+* ### 📋 Functional & Non-Functional Requirements
 
-This section details the functional specifications, business rules, and non-functional metrics for the **Contributory Regime Affiliation Module**.
+This section details the functional specifications to achieve business rules 01 and 02, and non-functional metrics for the **Contributory Regime Affiliation Module**.
 
 ---
 
