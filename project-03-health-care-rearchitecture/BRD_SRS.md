@@ -55,7 +55,7 @@ The Dominican Healthcare System is restructuring the architecture of the platfor
 
 ---
 
-### 1.6 Business Rules (BR)
+### 1.6 Business Rules (BRD)
 
 * **`BR-01` Mandatory Enrollment:** Every salaried worker must be enrolled by their employer in Family Health Insurance, Old-Age, Disability, & Survivors' Insurance, and Occupational Risk Insurance.
 * **`BR-02` Identity Verification:** The principal member's identity must be validated using their National ID Card (*Cédula*) or Resident Foreign Document against the official government source (JCE).
@@ -86,3 +86,61 @@ This SRS defines the software behavior for the **Contributory Regime Enrollment 
 * **API Gateway:** Exposes Contributory Affiliation services via secure REST APIs.
 * **Enterprise Service Bus (ESB):** Orchestrates external identity and tax validations (JCE/DGII).
 * **Data Access Layer:** The ESB serves as the sole orchestrated component authorized to read from and write to the core SQL database, abstracting direct database access from external endpoints.
+
+## 📋 3.0 Functional & Non-Functional Requirements
+
+This section details the functional specifications to achieve business rules 01 and 02, and non-functional metrics for the **Contributory Regime Affiliation Module**.
+
+---
+
+### 🔐 BR-01: Employer Registration & Status Verification
+
+### 🔹 Business Rule Overview
+Every salaried worker must be enrolled by an eligible, authenticated employer. Employers must be able to track the status of registration requests efficiently and securely.
+
+### 📑 Functional Requirements (FR)
+
+#### `FR-01.1` Employee Registration Submission
+* **Description:** The system shall allow the employer to submit a new employee registration to the contributory healthcare regime.
+* **Actor / User:** User registered as an employer with a valid National Taxpayer Registry (RNC).
+
+#### `FR-01.2` Registration Status Check
+* **Description:** The system shall allow the employer to verify the status of an employee registration.
+* **Status Lifecycle:**
+  * `PE` — **In Progress:** Request submitted, pending external/internal validation.
+  * `OK` — **Approved:** Affiliate registered successfully.
+  * `RE` — **Rejected:** Registration declined due to validation failure or business rule violation.
+
+---
+
+### ⚡ Non-Functional Requirements (NFR)
+
+| Requirement ID | Category | Metric / Specification |
+| :--- | :--- | :--- |
+| **`NFR-01.1`** | **Performance** | Employee data registration processing time must be **< 2 seconds**. |
+| **`NFR-02.01`** | **Latency / SLA** | The system shall display an employee registration status within **3 seconds for 95%** of user requests. |
+| **`NFR-02.02`** | **Scalability & Concurrency** | The system shall support at least **1,000 concurrent users** checking registration statuses without performance degradation. |
+| **`NFR-02.03`** | **Security & Access Control** | Only **authenticated employers** shall be allowed to view the registration status of their own employees. |
+
+---
+
+### 🆔 BR-02: Identity Validation Engine
+
+### 🔹 Business Rule Overview
+The principal member's identity must be validated against official government sources before affiliation can be processed.
+
+### 📑 Functional Requirements (FR)
+
+#### `FR-02.1` Governmental ID Validation
+* **Description:** The system shall validate the principal affiliate ID against the official governmental ID source (JCE).
+
+#### `FR-02.2` Foreign Identification Support
+* **Description:** The system shall validate a foreign passport as a valid identification document type for eligible resident affiliates.
+
+---
+
+### ⚡ Non-Functional Requirements (NFR)
+
+| Requirement ID | Category | Metric / Specification |
+| :--- | :--- | :--- |
+| **`NFR-02.1`** | **Data Integrity / Sync** | The system shall perform identity validation against the **latest actualization of the official governmental ID database**. |
